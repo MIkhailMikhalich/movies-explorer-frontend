@@ -1,0 +1,7 @@
+.menu__user{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}

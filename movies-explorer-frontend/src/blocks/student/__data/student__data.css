@@ -1,0 +1,13 @@
+.student__data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 66px;
+}
+@media screen and (max-width: 620px)
+{
+    .student__data
+    {
+        flex-direction: column-reverse;
+    }
+}

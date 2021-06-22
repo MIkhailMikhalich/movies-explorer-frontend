@@ -1,0 +1,21 @@
+.student
+{
+    max-width: 1280px;
+    margin: 110px auto 0px auto;
+    height: 50vh;
+
+}
+@media screen and (max-width: 620px)
+{
+    .student
+    {
+        height: 65vh;
+    }
+}
+@media screen and (max-width: 425px)
+{
+    .student
+    {
+        height: 67vh;
+    }
+}

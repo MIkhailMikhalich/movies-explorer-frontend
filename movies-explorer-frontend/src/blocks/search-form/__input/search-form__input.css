@@ -1,0 +1,21 @@
+.search-form__input
+{
+    border: none;
+    width: 88%;
+    font-size: 2em;
+    color: #a0a0a0;
+    text-align: center;
+}
+.search-form__input:active,
+.search-form__input:hover,
+.search-form__input:focus {
+outline: none;
+}
+@media screen and (max-width: 425px)
+{
+    .search-form__input
+    {
+        text-align: left;
+        font-size: 1.5em;
+    }
+}

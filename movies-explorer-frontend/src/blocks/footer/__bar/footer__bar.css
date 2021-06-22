@@ -1,0 +1,14 @@
+.footer__bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: solid 1px #E8E8E8;
+    padding-top: 20px;
+}
+@media screen and (max-width: 425px)
+{
+    .footer__bar
+    {
+        flex-direction: column-reverse;
+    }
+}

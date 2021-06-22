@@ -1,0 +1,21 @@
+.techs__heading
+{
+    font-size:  3em;
+    text-align: center;
+    margin: 90px auto 26px auto ;
+}
+@media screen and (max-width: 620px)
+{
+  .techs__heading
+  {
+    font-size: 1.5em;
+    line-height: 37px;
+  }
+}
+@media screen and (max-width: 320px)
+{
+  .techs__heading
+  {
+    font-size: 1.2em;
+  }
+}
