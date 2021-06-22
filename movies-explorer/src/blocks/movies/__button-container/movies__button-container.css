@@ -1,0 +1,9 @@
+.movies__button-container
+{
+    width: 90%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 37px auto 93px auto;
+}

@@ -1,0 +1,11 @@
+.portfolio__urls_element
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 1px #E8E8E8;
+}
+.portfolio__urls_element:last-child
+{
+    border-bottom: none;
+}

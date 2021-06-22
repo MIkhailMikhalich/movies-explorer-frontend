@@ -1,0 +1,21 @@
+.navtab__buttons-place {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 33%;
+  height: 49px;
+}
+
+@media screen and (max-width: 768px)
+{
+  .navtab__buttons-place
+  {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 620px)
+{
+  .navtab__buttons-place{
+    width: 90%;
+  }
+}

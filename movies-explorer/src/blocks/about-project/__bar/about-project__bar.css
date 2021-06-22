@@ -1,0 +1,14 @@
+.about-project__bar
+{
+    display: grid;
+    grid-template-columns: 228px 1fr;
+    margin: 110px auto 141px auto;
+}
+@media screen and (max-width: 620px)
+
+{
+    .about-project__bar
+    {
+        grid-template-columns: 100px 1fr;
+    }
+}
