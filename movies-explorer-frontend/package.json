@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "movies-explorer",
+=======
+  "name": "movies-explorer-frontend",
+>>>>>>> f4371c594cd59df9c8582177f15d72c69af64c01
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,7 +12,10 @@
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-router-dom": "^5.2.0",
+=======
+>>>>>>> f4371c594cd59df9c8582177f15d72c69af64c01
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
