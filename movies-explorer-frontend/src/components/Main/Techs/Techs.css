@@ -15,14 +15,13 @@
 @media screen and (max-width: 768px)
 {
   .techs{
-    height: 40vh;
+    height: auto;
   }
 }
 @media screen and (max-width: 620px)
 {
     .techs
     {
-      height: 60vh;
        background-color: white;
 
     }

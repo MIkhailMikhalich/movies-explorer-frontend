@@ -114,9 +114,9 @@
 @import url(./blocks/menu/__user/menu__user.css);
 @import url(./blocks/menu/__avatar/menu__avatar.css);
 @import url(./blocks/menu/__close/menu__close.css);
-
-
-
+@import url(./blocks/buttons-place/__checkbox/_checked/buttons-place__chechbox_checked.css);
+@import url(./blocks/menu/__close-button/menu__close-button.css);
+@import url(./blocks/card/__button/_saved/card__button_saved.css);
 
 
 

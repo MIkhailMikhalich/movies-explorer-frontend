@@ -15,3 +15,12 @@
 .navtab__about-button:hover {
   box-shadow: 0 0 10px 0 #e8e8e8 inset, 0 0 10px 4px gray;
 }
+
+@media screen and (max-width: 340px)
+{
+ .navtab__about-button
+ {
+   padding:10px;
+  font-size: 0.6em;
+ } 
+}

@@ -4,3 +4,13 @@
     max-width: 396px;
     width: 100%;
 }
+@media screen and (max-width: 425px)
+{
+    .register-login__header
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

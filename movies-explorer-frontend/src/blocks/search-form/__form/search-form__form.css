@@ -8,6 +8,7 @@
     border-bottom: 1px solid #e8e8e8;
     padding: 15px;
 }
+
 @media screen and (max-width: 425px)
 {
     .search-form__form

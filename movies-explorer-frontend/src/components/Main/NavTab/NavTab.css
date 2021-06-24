@@ -6,13 +6,13 @@
 
 @media screen and (max-width: 768px) {
   .navtab {
-    height: 75vh;
+    height: 834px;
   }
 }
 @media screen and (max-width: 620px)
 {
     .navtab
     {
-        height: 50vh;
+        height: 580px;
     }
 }

@@ -27,3 +27,10 @@ outline: none;
 }
 
 
+@media screen and (max-width: 620px)
+{
+    .register-login__input
+    {
+        width: 90%;
+    }
+}

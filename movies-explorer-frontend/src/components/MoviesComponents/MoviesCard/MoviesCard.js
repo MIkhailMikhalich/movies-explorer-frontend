@@ -1,5 +1,4 @@
 import saveicon from "../../../images/saveicon.svg";
-import savedicon from "../../../images/savedicon.svg";
 import React from "react";
 
 function MoviesCard(props) {
@@ -11,19 +10,15 @@ function MoviesCard(props) {
           <span className="card__time">{props.time}</span>
         </div>
         <button type="button" className="button card__button">
-          {props.isInSaved ? (
-            <img
-              className="card__button_icon"
-              src={savedicon}
-              alt="Закладка"
-            ></img>
-          ) : (
-            <img
-              className="card__button_icon"
-              src={saveicon}
-              alt="Крестик"
-            ></img>
-          )}
+          
+          <img
+            className={`card__button_icon ${
+              props.isInSaved && "card__button_saved"
+            }`}
+            src={saveicon}
+            alt="Кнопка"
+          ></img>
+          
         </button>
       </div>
       <img

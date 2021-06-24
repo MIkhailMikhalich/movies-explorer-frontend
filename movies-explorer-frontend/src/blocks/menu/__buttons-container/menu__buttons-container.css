@@ -11,3 +11,10 @@
     z-index: 2;
     text-align: center;
 }
+@media screen and (max-width: 425px)
+{
+    .menu__buttons-container
+    {
+        width: 100%;
+    }
+}

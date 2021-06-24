@@ -1,0 +1,6 @@
+.card__button_saved
+{
+    background-image: url(../../../../images/savedicon.svg);
+    z-index: 1;
+    position: relative;
+}

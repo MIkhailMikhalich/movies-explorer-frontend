@@ -9,7 +9,7 @@ function SearchForm(props) {
         <input className="search-form__input" placeholder="Фильмы"></input>
         <button className="button search-form__button" type="submit">Найти</button>
       </form>
-        <input id="search-form__checkbox" className="search-form__checkbox" type="checkbox" />
+        <input id="search-form__checkbox" required="required" className="search-form__checkbox" type="checkbox" />
         <label for="search-form__checkbox" className="search-form__label">Короткометражки</label>
     </section>
   );

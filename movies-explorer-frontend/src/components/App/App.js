@@ -77,6 +77,7 @@ function App() {
           onSavedMovies={handleSavedMoviesPush}
           onProfile={handleProfile}
           onMenu={handleMenuButton}
+          isMenuOpened={isMenuOpened}
           isLoggedIn={isLoggedIn}
         />
         <Main />
@@ -85,6 +86,7 @@ function App() {
           onMovies={handleMoviesPush}
           onSavedMovies={handleSavedMoviesPush}
           onProfile={handleProfile}
+          onMenu={handleMenuButton}
           isMenuOpened={isMenuOpened}
         />
 
@@ -108,14 +110,15 @@ function App() {
           onSavedMovies={handleSavedMoviesPush}
           onMenu={handleMenuButton}
           onProfile={handleProfile}
+          isMenuOpened={isMenuOpened}
           isLoggedIn={isLoggedIn}
         />
         <Movies isInSaved={isInSaved} />
-        <Main />
         <Menu
           onMain={handleLogoPush}
           onMovies={handleMoviesPush}
           onSavedMovies={handleSavedMoviesPush}
+          onMenu={handleMenuButton}
           onProfile={handleProfile}
           isMenuOpened={isMenuOpened}
         />
@@ -131,14 +134,15 @@ function App() {
           onSavedMovies={handleSavedMoviesPush}
           onMenu={handleMenuButton}
           onProfile={handleProfile}
+          isMenuOpened={isMenuOpened}
           isLoggedIn={isLoggedIn}
         />
         <SavedMovies isInSaved={isInSaved} />
-        <Main />
         <Menu
           onMain={handleLogoPush}
           onMovies={handleMoviesPush}
           onSavedMovies={handleSavedMoviesPush}
+          onMenu={handleMenuButton}
           onProfile={handleProfile}
           isMenuOpened={isMenuOpened}
         />
@@ -153,6 +157,7 @@ function App() {
           onSavedMovies={handleSavedMoviesPush}
           onMenu={handleMenuButton}
           onProfile={handleProfile}
+          isMenuOpened={isMenuOpened}
           isLoggedIn={isLoggedIn}
         />
         <Profile />
@@ -160,10 +165,10 @@ function App() {
           onMain={handleLogoPush}
           onMovies={handleMoviesPush}
           onSavedMovies={handleSavedMoviesPush}
+          onMenu={handleMenuButton}
           onProfile={handleProfile}
           isMenuOpened={isMenuOpened}
         />
-        <Main />
       </Route>
       <Route path="/*">
         <NotFound onBack={handleBackButton} />

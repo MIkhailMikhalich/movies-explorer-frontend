@@ -24,6 +24,7 @@ function Header(props) {
           onMovies={props.onMovies}
           onSavedMovies={props.onSavedMovies}
           onProfile={props.onProfile}
+          isMenuOpened={props.isMenuOpened}
         />
       )}
     </header>

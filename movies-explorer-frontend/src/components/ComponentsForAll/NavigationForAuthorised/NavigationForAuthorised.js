@@ -15,17 +15,18 @@ function NavigationForAuthorised(props) {
   function handleProfile() {
     props.onProfile();
   }
+ 
 
   return (
     <div className="buttons-place">
-      <input type="checkbox" id="checkbox" class="buttons-place__checkbox" />
+      <input type="checkbox"   id="checkbox" className={`buttons-place__checkbox`} />
       <label for="checkbox">
         <button className="buttons-place__menu button" onClick={handleMenu}>
           <div class="buttons-place__hamburger">
-            <span id="bar1" class="buttons-place__hamburger_bar "></span>
-            <span id="bar2" class="buttons-place__hamburger_bar "></span>
-            <span id="bar3" class="buttons-place__hamburger_bar "></span>
-            <span id="bar4" class="buttons-place__hamburger_bar "></span>
+            <span id="bar1" className="buttons-place__hamburger_bar "></span>
+            <span id="bar2" className="buttons-place__hamburger_bar "></span>
+            <span id="bar3" className="buttons-place__hamburger_bar "></span>
+            <span id="bar4" className="buttons-place__hamburger_bar "></span>
           </div>
         </button>
       </label>
