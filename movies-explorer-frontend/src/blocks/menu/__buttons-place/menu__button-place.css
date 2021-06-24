@@ -1,0 +1,6 @@
+.menu__buttons-place
+{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}

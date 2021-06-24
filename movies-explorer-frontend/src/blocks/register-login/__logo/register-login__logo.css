@@ -1,0 +1,12 @@
+.register-login__logo
+{
+    margin: 70px auto 0 auto;
+    width: 38px;
+}
+@media screen and (max-width: 425px)
+{
+    .register-login__logo
+    {
+        margin: 56px auto 0 auto;
+    }
+}

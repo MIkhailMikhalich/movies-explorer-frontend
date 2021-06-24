@@ -1,0 +1,17 @@
+.student__urls
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 500;
+    list-style: none;
+    padding: 0;
+    max-width: 70%;
+}
+@media screen and (max-width: 1100px)
+{
+    .student__urls
+    {
+        flex-wrap: wrap;
+    }
+}

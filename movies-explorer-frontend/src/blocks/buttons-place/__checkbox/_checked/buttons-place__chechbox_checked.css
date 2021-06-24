@@ -1,0 +1,21 @@
+.buttons-place__chechbox_checked+ label > .buttons-place__hamburger > #bar1{
+    width: 0px;
+    transform: translateX(1px);
+    background-color: transparent;
+    
+}
+
+.buttons-place__chechbox_checked + label > .buttons-place__hamburger > #bar2{
+    transform: rotate(45deg);
+}
+
+.buttons-place__chechbox_checked + label > .buttons-place__hamburger > #bar3{
+    transform: rotate(-45deg);
+}
+
+.buttons-place__chechbox_checked + label > .buttons-place__hamburger > #bar4{
+    width: 0px;
+    transform: translateX(1px);
+    background-color: transparent;
+    
+}

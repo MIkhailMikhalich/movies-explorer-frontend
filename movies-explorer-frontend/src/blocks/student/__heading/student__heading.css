@@ -1,0 +1,12 @@
+.student__heading
+{
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0 auto 18px auto;
+}
+@media screen and (max-width: 620px)
+{
+    .student__heading{
+        margin: 40px auto 18px auto;
+    }
+}

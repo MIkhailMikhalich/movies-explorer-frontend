@@ -1,0 +1,11 @@
+.about-project__content
+{
+    margin: 110px auto 110px auto; 
+    max-width: 90%;
+}
+@media screen and (max-width: 620px)
+{
+    .about-project__content{
+        margin: 0 auto;
+    }
+}

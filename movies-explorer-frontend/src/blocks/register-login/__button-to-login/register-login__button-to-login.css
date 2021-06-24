@@ -1,0 +1,11 @@
+.register-login__button-to-login
+{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin: 0 auto 0 auto;
+    color: #A0A0A0;
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -1,0 +1,10 @@
+.portfolio__url-name
+{
+    margin: 20px 0 19px 0;
+}
+@media screen and (max-width: 620px)
+{
+    .portfolio__url-name{
+        font-size: 0.5em;
+    }
+}
