@@ -1,7 +1,6 @@
 .buttons-place__menu {
   display: none;
   overflow: hidden;
-  z-index: 100;
 }
 
 @media screen and (max-width: 768px) {

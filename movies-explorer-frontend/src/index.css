@@ -86,13 +86,18 @@
 @import url(./blocks/search-form/__label/search-form__label.css);
 @import url(./components/MoviesComponents/MoviesCard/MoviesCard.css);
 @import url(./components/MoviesComponents/MoviesCardList/MoviesCardList.css);
-@import url(./blocks/card/__button/card__button.css);
 @import url(./blocks/movies/__button/movies__button.css);
 @import url(./blocks/movies/__button-container/movies__button-container.css);
+@import url(./blocks/movies/__button-container/_visible/movies__button-container_visible.css);
 @import url(./blocks/card/__name-container/card__name-container.css);
+@import url(./blocks/card/__button/card__button.css);
 @import url(./blocks/card/__name/card__name.css);
 @import url(./blocks/card/__pic/card__pic.css);
+@import url(./blocks/card/__link/card__link.css);
 @import url(./blocks/card/__time/card__time.css);
+@import url(./blocks/card/__button/_icon/card__button_icon.css);
+@import url(./blocks/card/__button/_saved/card__button_saved.css);
+@import url(./blocks/card/__button/_saved-in-movies/card__button_saved-in-movies.css);
 @import url(./components/Profile/Profile.css);
 @import url(./blocks/profile/__buttons/profile__buttons.css);
 @import url(./blocks/profile/__exit/profile__exit.css);
@@ -101,11 +106,7 @@
 @import url(./blocks/profile/__input/profile__input.css);
 @import url(./blocks/profile/__input-container/profile__input-container.css);
 @import url(./blocks/profile/__input-name/profile__input-name.css);
-@import url(./blocks/buttons-place/__menu/buttons-place__menu.css);
-@import url(./blocks/buttons-place/__hamburger/_bar/buttons-place__hamburger_bar.css);
-@import url(./blocks/buttons-place/__checkbox/buttons-place__chechbox.css);
-@import url(./blocks/buttons-place/__hamburger/buttons-place__hamburger.css);
-@import url(./blocks/buttons-place/buttons-place.css);
+
 @import url(./components/ComponentsForAll/Menu/Menu.css);
 @import url(./blocks/menu/__visible/menu__visible.css);
 @import url(./blocks/menu/__button/menu__button.css);
@@ -114,9 +115,26 @@
 @import url(./blocks/menu/__user/menu__user.css);
 @import url(./blocks/menu/__avatar/menu__avatar.css);
 @import url(./blocks/menu/__close/menu__close.css);
-@import url(./blocks/buttons-place/__checkbox/_checked/buttons-place__chechbox_checked.css);
 @import url(./blocks/menu/__close-button/menu__close-button.css);
 @import url(./blocks/card/__button/_saved/card__button_saved.css);
+@import url(./blocks/buttons-place/__menu/buttons-place__menu.css);
+@import url(./blocks/buttons-place/__hamburger/_bar/buttons-place__hamburger_bar.css);
+@import url(./blocks/buttons-place/__checkbox/buttons-place__chechbox.css);
+@import url(./blocks/buttons-place/__hamburger/buttons-place__hamburger.css);
+@import url(./blocks/buttons-place/buttons-place.css);
+@import url(./blocks/preloader/__message/preloader__message.css);
+@import url(./components/Movies/Preloader/Preloader.css);
+@import url(./components/ModalWindow/ModalWindow.css);
+@import url(./blocks/modalwindow/__close-button/modalwindow__close-button.css);
+@import url(./blocks/modalwindow/__message-area/modalwindow__message-area.css);
+@import url(./blocks/modalwindow/__message/modalwindow__message.css);
+@import url(./blocks/modalwindow/__overlay/modalwindow__overlay.css);
+@import url(./blocks/modalwindow/__pic/modalwindow__pic.css);
+@import url(./blocks/modalwindow/__status/modalwindow__status.css);
+@import url(./blocks/modalwindow/__window/modalwindow__window.css);
+@import url(./blocks/modalwindow/_visible/modalwindow_visible.css);
+@import url(./blocks/modalwindow/__heading/modalwindow__heading.css);
+
 
 
 

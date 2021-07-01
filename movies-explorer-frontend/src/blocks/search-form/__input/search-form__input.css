@@ -4,11 +4,16 @@
   font-size: 2em;
   color: #a0a0a0;
   text-align: center;
+  transition-property: border,background-color,border-radius;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
 }
 .search-form__input:focus {
   border: 1px solid black;
   border-radius: 20px;
   outline: none;
+  background-color: rgba(220, 220, 220, 0.3);
+
 }
 .search-form__input:active,
 .search-form__input:hover {

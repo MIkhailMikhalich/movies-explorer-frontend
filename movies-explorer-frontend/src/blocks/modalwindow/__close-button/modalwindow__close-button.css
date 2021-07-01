@@ -1,0 +1,14 @@
+.modalwindow__close-button
+{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    
+}
+@media screen and (max-width:425px)
+{
+    .modalwindow__close-button
+    {
+        top:-30px
+    }
+}

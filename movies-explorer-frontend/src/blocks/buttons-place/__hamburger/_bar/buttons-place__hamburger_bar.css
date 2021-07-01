@@ -7,18 +7,20 @@
   border-radius: 4px;
   transition: all 0.4s ease-in-out;
   position: absolute;
-  z-index: 2;
 }
-#bar1 {
+.bar1 {
   top: 0;
 }
-#bar2 {
+
+.bar2,
+.bar3 {
   top: 13.5px;
 }
-#bar3 {
-  top: 13.5px;
+
+.bar3 {
   right: 0;
 }
-#bar4 {
+
+.bar4 {
   bottom: 0;
 }

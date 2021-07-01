@@ -1,5 +1,6 @@
 import "./App.css";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import currentUserContext from "../contexts/CurrentUserContext.js";
 import Header from "../ComponentsForAll/Header/Header.js";
 import Footer from "../ComponentsForAll/Footer/Footer";
 import Main from "../Main/Main.js";
@@ -9,33 +10,185 @@ import NotFound from "../NotFound/NotFound";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import api from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 import Menu from "../ComponentsForAll/Menu/Menu";
+import ModalWindow from "../ModalWindow/ModalWindow";
 import { useState } from "react";
 import React from "react";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isInSaved, setIsInSaved] = useState(false);
+  const [isExist, setIsExist] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [message, setMessage] = useState("");
+
   let history = useHistory();
+
   React.useEffect(() => {
-    const anchors = document.querySelectorAll(
-      '.navtab__buttons-place a[href*="#"]'
-    );
-
-    for (let anchor of anchors) {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        const blockID = anchor.getAttribute("href").substr(1);
-
-        document.getElementById(blockID).scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+    setMessage("Пока все хорошо :)");
+    tokenCheck();
+    if (isLoggedIn) {
+      let jwt = localStorage.getItem("jwt");
+      api
+        .getAuthProfile(jwt)
+        .then((data) => {
+          setCurrentUser(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsModalOpened(true);
+          setMessage(err);
         });
+    
+      api
+        .getMovies()
+        .then((data) => {
+          setSavedMovies(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsModalOpened(true);
+          setMessage(err);
+        });
+    
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          setMovies(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsModalOpened(true);
+          setMessage(err);
+        });
+    }
+  }, [isLoggedIn]);
+
+  function closeModal()
+  {
+    setIsModalOpened(false);
+  }
+
+  function updateData() {
+    api
+      .getMovies()
+      .then((data) => {
+        setSavedMovies(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
+      });
+  }
+
+  function tokenCheck() {
+    if (localStorage.getItem("jwt")) {
+      let jwt = localStorage.getItem("jwt");
+      api
+        .getAuthProfile(jwt)
+        .then((data) => {
+          setIsLoggedIn(true);
+          history.push("./movies");
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsModalOpened(true);
+          setMessage(err);
+        });
+    }
+  }
+  function handleRegistration(password, email, name) {
+    return api
+      .registerUser(password, email, name)
+      .then((res) => {
+        history.push("/signin");
+
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
+      });
+  }
+  function handleUpdateUser(name, email) {
+    api
+      .setProfileData(name, email)
+      .then((data) => {
+        setCurrentUser(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
       });
     }
-  }, []);
+  function handleLogin(password, email) {
+    return api
+      .authorizeUser(password, email)
+      .then((data) => {
+        history.push("/main");
+
+        localStorage.setItem("jwt", data.token);
+        tokenCheck();
+        return;
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
+      });
+  }
+  function handleSave(data) {
+    api.postMovie(data)
+    .then((data))
+    .catch((err) => {
+      console.log(err);
+      setIsModalOpened(true);
+      setMessage(err);
+    });
+    updateData();
+  }
+
+  function handleDelete(ID) {
+    api
+      .deleteMovie(ID)
+      .then(() => {
+        api
+          .getMovies()
+          .then((data) => {
+            setSavedMovies(data);
+          })
+          .catch((err) => {
+            console.log(err);
+            setIsModalOpened(true);
+            setMessage(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
+      });
+  }
+  function handleDeleteFromMovies(ID) {
+    api.getMovies().then((data) => {
+      data.forEach((item) => {
+        if (item.movieId === ID) handleDelete(item._id);
+      });
+    });
+  }
+  function handleExit() {
+    setIsLoggedIn(false);
+    history.push("./signin");
+    localStorage.removeItem("jwt");
+  }
 
   function handleMenuButton() {
     setIsMenuOpened(!isMenuOpened);
@@ -68,108 +221,130 @@ function App() {
 
   return (
     <Switch>
-      <Route exact onEnter={handleEnterButton} path="/">
-        <Header
-          onLogo={handleLogoPush}
-          onEnter={handleEnterButton}
-          onRegistration={handleRegistrarionButton}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onProfile={handleProfile}
-          onMenu={handleMenuButton}
-          isMenuOpened={isMenuOpened}
-          isLoggedIn={isLoggedIn}
-        />
-        <Main />
-        <Menu
-          onMain={handleLogoPush}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onProfile={handleProfile}
-          onMenu={handleMenuButton}
-          isMenuOpened={isMenuOpened}
-        />
+      <currentUserContext.Provider value={currentUser}>
+        <Route exact onEnter={handleEnterButton} path="/">
+          <Header
+            onLogo={handleLogoPush}
+            onEnter={handleEnterButton}
+            onRegistration={handleRegistrarionButton}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onProfile={handleProfile}
+            onMenu={handleMenuButton}
+            isMenuOpened={isMenuOpened}
+            isLoggedIn={isLoggedIn}
+          />
+          <Main />
+          <Menu
+            onMain={handleLogoPush}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onProfile={handleProfile}
+            onMenu={handleMenuButton}
+            isMenuOpened={isMenuOpened}
+          />
 
-        <Footer />
-      </Route>
-      <Route path="/signup">
-        <Register onLogo={handleLogoPush} onEnter={handleEnterButton} />
-      </Route>
-      <Route path="/signin">
-        <Login
-          onLogo={handleLogoPush}
-          onRegistration={handleRegistrarionButton}
-        />
-      </Route>
-      <Route path="/movies">
-        <Header
-          onLogo={handleLogoPush}
-          onEnter={handleEnterButton}
-          onRegistration={handleRegistrarionButton}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-          isLoggedIn={isLoggedIn}
-        />
-        <Movies isInSaved={isInSaved} />
-        <Menu
-          onMain={handleLogoPush}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-        />
+          <Footer />
+        </Route>
+        <Route path="/signup">
+          <Register
+            onLogo={handleLogoPush}
+            onLogin={handleEnterButton}
+            onRegistration={handleRegistration}
+          />
+        </Route>
+        <Route path="/signin">
+          <Login
+            onLogo={handleLogoPush}
+            onRegistration={handleRegistrarionButton}
+            onLogin={handleLogin}
+          />
+        </Route>
+        <Route path="/movies">
+          <Header
+            onLogo={handleLogoPush}
+            onEnter={handleEnterButton}
+            onRegistration={handleRegistrarionButton}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+            isLoggedIn={isLoggedIn}
+          />
+          <Movies
+            onUpdate={updateData}
+            onDelete={handleDeleteFromMovies}
+            onSave={handleSave}
+            isExist={isExist}
+            setIsExist={setIsExist}
+            movies={movies}
+            savedMovies={savedMovies}
+          />
+          <Menu
+            onMain={handleLogoPush}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+          />
 
-        <Footer />
-      </Route>
-      <Route path="/saved-movies">
-        <Header
-          onLogo={handleLogoPush}
-          onEnter={handleEnterButton}
-          onRegistration={handleRegistrarionButton}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-          isLoggedIn={isLoggedIn}
-        />
-        <SavedMovies isInSaved={isInSaved} />
-        <Menu
-          onMain={handleLogoPush}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-        />
-        <Footer />
-      </Route>
-      <Route path="/profile">
-        <Header
-          onLogo={handleLogoPush}
-          onEnter={handleEnterButton}
-          onRegistration={handleRegistrarionButton}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-          isLoggedIn={isLoggedIn}
-        />
-        <Profile />
-        <Menu
-          onMain={handleLogoPush}
-          onMovies={handleMoviesPush}
-          onSavedMovies={handleSavedMoviesPush}
-          onMenu={handleMenuButton}
-          onProfile={handleProfile}
-          isMenuOpened={isMenuOpened}
-        />
-      </Route>
+          <Footer />
+        </Route>
+        <Route path="/saved-movies">
+          <Header
+            onLogo={handleLogoPush}
+            onEnter={handleEnterButton}
+            onRegistration={handleRegistrarionButton}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+            isLoggedIn={isLoggedIn}
+          />
+          <SavedMovies
+            onUpdate={updateData}
+            onDelete={handleDelete}
+            isExist={isExist}
+            setIsExist={setIsExist}
+            movies={savedMovies}
+          />
+          <Menu
+            onMain={handleLogoPush}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+          />
+          <Footer />
+        </Route>
+        <Route path="/profile">
+          <Header
+            onLogo={handleLogoPush}
+            onEnter={handleEnterButton}
+            onRegistration={handleRegistrarionButton}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+            isLoggedIn={isLoggedIn}
+          />
+          <Profile onExit={handleExit} onUpdateUser={handleUpdateUser} />
+          <Menu
+            onMain={handleLogoPush}
+            onMovies={handleMoviesPush}
+            onSavedMovies={handleSavedMoviesPush}
+            onMenu={handleMenuButton}
+            onProfile={handleProfile}
+            isMenuOpened={isMenuOpened}
+          />
+        </Route>
+    <ModalWindow onCLose={closeModal} isOpen={isModalOpened}  message={message}></ModalWindow>
+      </currentUserContext.Provider>
       <Route path="/*">
         <NotFound onBack={handleBackButton} />
       </Route>

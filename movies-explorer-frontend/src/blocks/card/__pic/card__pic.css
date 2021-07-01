@@ -1,5 +1,8 @@
 .card__pic
 {
-    object-fit: cover;
-    max-width: 100%;
+    display: block;
+    object-fit: fill;
+    width: inherit;
+    
+    min-height: 190px;
 }
