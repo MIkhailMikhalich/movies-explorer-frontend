@@ -7,12 +7,11 @@ function SearchForm(props) {
     setIsChecked(!isChecked);
   }
   React.useEffect(()=>{
-    document.querySelector(".search-form__input").value=props.searchLine;
     filterList();
   },[])
   React.useEffect(() => {
    filterList();
-  }, [props.searchLine, isChecked]);
+  }, [props.searchLine, isChecked,props.movies]);
 
   function filterList()
   {

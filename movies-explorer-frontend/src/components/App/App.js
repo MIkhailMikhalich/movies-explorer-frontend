@@ -98,9 +98,8 @@ function App() {
 
   function tokenCheck() {
     if (localStorage.getItem("jwt")) {
-      let jwt = localStorage.getItem("jwt");
       api
-        .getAuthProfile(jwt)
+        .getAuthProfile(localStorage.getItem("jwt"))
         .then((data) => {
           setIsLoggedIn(true);
           history.push("./");

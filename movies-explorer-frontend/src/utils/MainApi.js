@@ -185,12 +185,11 @@ class MainApi {
     });
   }
 }
-let jwt = localStorage.getItem("jwt");
+ 
 const api = new MainApi({
-  //url: "https://api.medvedmovies-explorer.nomoredomains.club/",
-  url:"http://localhost:3001/",
+ url: "https://api.medvedmovies-explorer.nomoredomains.club/",
   headers: {
-    authorization: `${jwt}`,
+    authorization: `${localStorage.getItem("jwt")}`,
     "Content-Type": "application/json",
   },
 });

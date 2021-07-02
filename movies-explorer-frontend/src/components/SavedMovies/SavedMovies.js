@@ -9,6 +9,7 @@ function SavedMovies(props) {
   const [showedList, setShowedList] = React.useState([]);
   const [numberOfMovies, setNunberOfMovies] = React.useState(0);
   function handleOnMore() {
+    props.onUpdate();
     if (window.innerWidth >= 1280) {
       return setNunberOfMovies(numberOfMovies + 3);
     } else if (window.innerWidth <= 1250) {
@@ -47,7 +48,7 @@ function SavedMovies(props) {
   React.useEffect(() => {
     if (
       filteredList.length >= numberOfMovies &&
-      showedList.length !== filteredList.length
+      showedList.length !== filteredList.length && props.movies.length
     )
       props.setIsExist(true);
     else props.setIsExist(false);
