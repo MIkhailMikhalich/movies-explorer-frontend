@@ -14,10 +14,13 @@ import api from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import Menu from "../ComponentsForAll/Menu/Menu";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import ProtectedRoute from "../Route/ProtectedRoute";
+import CongratsWindow from "../CongratsWindow/CongratsWindow";
 import { useState } from "react";
 import React from "react";
 
 function App() {
+  const [searchLine, setSearchLine] = React.useState(localStorage.getItem("search"));
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isExist, setIsExist] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -25,10 +28,16 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isCongratsOpen, setIsCongratsOpen] = useState(false);
   const [message, setMessage] = useState("");
 
   let history = useHistory();
 
+ 
+  
+  React.useEffect(()=>{
+    localStorage.setItem("search",searchLine);
+  },[searchLine])
   React.useEffect(() => {
     setMessage("Пока все хорошо :)");
     tokenCheck();
@@ -44,7 +53,7 @@ function App() {
           setIsModalOpened(true);
           setMessage(err);
         });
-    
+
       api
         .getMovies()
         .then((data) => {
@@ -55,7 +64,7 @@ function App() {
           setIsModalOpened(true);
           setMessage(err);
         });
-    
+
       moviesApi
         .getMovies()
         .then((data) => {
@@ -69,9 +78,9 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  function closeModal()
-  {
+  function closeModal() {
     setIsModalOpened(false);
+    setIsCongratsOpen(false);
   }
 
   function updateData() {
@@ -94,7 +103,7 @@ function App() {
         .getAuthProfile(jwt)
         .then((data) => {
           setIsLoggedIn(true);
-          history.push("./movies");
+          history.push("./");
         })
         .catch((err) => {
           console.log(err);
@@ -108,7 +117,6 @@ function App() {
       .registerUser(password, email, name)
       .then((res) => {
         history.push("/signin");
-
         return res;
       })
       .catch((err) => {
@@ -122,19 +130,19 @@ function App() {
       .setProfileData(name, email)
       .then((data) => {
         setCurrentUser(data.data);
+        setIsCongratsOpen(true);
       })
       .catch((err) => {
         console.log(err);
         setIsModalOpened(true);
         setMessage(err);
       });
-    }
+  }
   function handleLogin(password, email) {
     return api
       .authorizeUser(password, email)
       .then((data) => {
         history.push("/main");
-
         localStorage.setItem("jwt", data.token);
         tokenCheck();
         return;
@@ -146,13 +154,14 @@ function App() {
       });
   }
   function handleSave(data) {
-    api.postMovie(data)
-    .then((data))
-    .catch((err) => {
-      console.log(err);
-      setIsModalOpened(true);
-      setMessage(err);
-    });
+    api
+      .postMovie(data)
+      .then(data)
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
+      });
     updateData();
   }
 
@@ -178,11 +187,18 @@ function App() {
       });
   }
   function handleDeleteFromMovies(ID) {
-    api.getMovies().then((data) => {
-      data.forEach((item) => {
-        if (item.movieId === ID) handleDelete(item._id);
+    api
+      .getMovies()
+      .then((data) => {
+        data.forEach((item) => {
+          if (item.movieId === ID) handleDelete(item._id);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpened(true);
+        setMessage(err);
       });
-    });
   }
   function handleExit() {
     setIsLoggedIn(false);
@@ -232,6 +248,7 @@ function App() {
             onProfile={handleProfile}
             onMenu={handleMenuButton}
             isMenuOpened={isMenuOpened}
+            isLoggedInForHeader={isLoggedIn}
             isLoggedIn={isLoggedIn}
           />
           <Main />
@@ -260,8 +277,9 @@ function App() {
             onLogin={handleLogin}
           />
         </Route>
-        <Route path="/movies">
-          <Header
+        <div className="page__content">
+          <ProtectedRoute
+            path="/movies"
             onLogo={handleLogoPush}
             onEnter={handleEnterButton}
             onRegistration={handleRegistrarionButton}
@@ -271,8 +289,11 @@ function App() {
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
             isLoggedIn={isLoggedIn}
+            isLoggedInForHeader={isLoggedIn}
+            component={Header}
           />
-          <Movies
+          <ProtectedRoute
+            path="/movies"
             onUpdate={updateData}
             onDelete={handleDeleteFromMovies}
             onSave={handleSave}
@@ -280,20 +301,31 @@ function App() {
             setIsExist={setIsExist}
             movies={movies}
             savedMovies={savedMovies}
+            searchLine ={searchLine}
+            setSearchLine={setSearchLine}
+            component={Movies}
+            isLoggedIn={isLoggedIn}
           />
-          <Menu
+          <ProtectedRoute
+            path="/movies"
             onMain={handleLogoPush}
             onMovies={handleMoviesPush}
             onSavedMovies={handleSavedMoviesPush}
             onMenu={handleMenuButton}
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
+            component={Menu}
+            isLoggedIn={isLoggedIn}
           />
 
-          <Footer />
-        </Route>
-        <Route path="/saved-movies">
-          <Header
+          <ProtectedRoute
+            path="/movies"
+            component={Footer}
+            isLoggedIn={isLoggedIn}
+          />
+
+          <ProtectedRoute
+            path="/saved-movies"
             onLogo={handleLogoPush}
             onEnter={handleEnterButton}
             onRegistration={handleRegistrarionButton}
@@ -303,26 +335,40 @@ function App() {
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
             isLoggedIn={isLoggedIn}
+            isLoggedInForHeader={isLoggedIn}
+            component={Header}
           />
-          <SavedMovies
+          <ProtectedRoute
+            path="/saved-movies"
             onUpdate={updateData}
             onDelete={handleDelete}
             isExist={isExist}
             setIsExist={setIsExist}
             movies={savedMovies}
+            searchLine ={searchLine}
+            setSearchLine={setSearchLine}
+            component={SavedMovies}
+            isLoggedIn={isLoggedIn}
           />
-          <Menu
+          <ProtectedRoute
+            path="/saved-movies"
             onMain={handleLogoPush}
             onMovies={handleMoviesPush}
             onSavedMovies={handleSavedMoviesPush}
             onMenu={handleMenuButton}
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
+            isLoggedIn={isLoggedIn}
+            component={Menu}
           />
-          <Footer />
-        </Route>
-        <Route path="/profile">
-          <Header
+          <ProtectedRoute
+            path="/saved-movies"
+            component={Footer}
+            isLoggedIn={isLoggedIn}
+          />
+
+          <ProtectedRoute
+            path="/profile"
             onLogo={handleLogoPush}
             onEnter={handleEnterButton}
             onRegistration={handleRegistrarionButton}
@@ -332,18 +378,34 @@ function App() {
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
             isLoggedIn={isLoggedIn}
+            isLoggedInForHeader={isLoggedIn}
+            component={Header}
           />
-          <Profile onExit={handleExit} onUpdateUser={handleUpdateUser} />
-          <Menu
+          <ProtectedRoute
+            path="/profile"
+            onExit={handleExit}
+            onUpdateUser={handleUpdateUser}
+            component={Profile}
+            isLoggedIn={isLoggedIn}
+          />
+          <ProtectedRoute
+            path="/profile"
             onMain={handleLogoPush}
             onMovies={handleMoviesPush}
             onSavedMovies={handleSavedMoviesPush}
             onMenu={handleMenuButton}
             onProfile={handleProfile}
             isMenuOpened={isMenuOpened}
+            component={Menu}
+            isLoggedIn={isLoggedIn}
           />
-        </Route>
-    <ModalWindow onCLose={closeModal} isOpen={isModalOpened}  message={message}></ModalWindow>
+        </div>
+        <ModalWindow
+          onCLose={closeModal}
+          isOpen={isModalOpened}
+          message={message}
+        />{" "}
+        <CongratsWindow onCLose={closeModal} isOpen={isCongratsOpen} />
       </currentUserContext.Provider>
       <Route path="/*">
         <NotFound onBack={handleBackButton} />

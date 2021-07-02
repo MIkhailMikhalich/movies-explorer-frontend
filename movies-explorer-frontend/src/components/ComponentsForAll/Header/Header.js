@@ -5,7 +5,7 @@ import NavigationForAuthorised from "../NavigationForAuthorised/NavigationForAut
 import React from "react";
 
 function Header(props) {
-  const loggedin = props.isLoggedIn;
+
 
   return (
     <header className="header ">
@@ -13,7 +13,7 @@ function Header(props) {
         <img className="header__logo" src={logo} alt="Логотип" />
       </button>
       {}
-      {!loggedin ? (
+      {!props.isLoggedInForHeader ? (
         <Navigation
           onEnter={props.onEnter}
           onRegistration={props.onRegistration}

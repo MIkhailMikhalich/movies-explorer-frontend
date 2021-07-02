@@ -33,11 +33,9 @@ function SavedMovies(props) {
   }
   function HandleDeleteFromFilter(ID) {
     props.onDelete(ID);
-    setShowedList((showedList) =>
-      showedList.filter((item) => item._id !== ID)
-    );
+    setShowedList((showedList) => showedList.filter((item) => item._id !== ID));
   }
-    React.useEffect(() => {
+  React.useEffect(() => {
     setShowedList(filteredList.slice(0, numberOfMovies));
   }, [numberOfMovies]);
 
@@ -62,11 +60,12 @@ function SavedMovies(props) {
         setIsLoading(false);
       }, 1000);
     setShowedList(filteredList.slice(0, numberOfMovies));
-
   }, [filteredList]);
   return (
     <main>
       <SearchForm
+        searchLine={props.searchLine}
+        setSearchLine={props.setSearchLine}
         numberOfMovies={numberOfMovies}
         setshowedList={setShowedList}
         onChange={handleWindow}

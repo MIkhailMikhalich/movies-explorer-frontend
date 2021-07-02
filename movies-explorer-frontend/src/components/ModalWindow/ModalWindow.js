@@ -32,7 +32,7 @@ function ModalWindow(props) {
     if (props.message.includes("400"))
     {
         message="Извините но отправленные данные не верны";
-        status="409";
+        status="400";
     }
     else
     if (props.message.includes("404"))

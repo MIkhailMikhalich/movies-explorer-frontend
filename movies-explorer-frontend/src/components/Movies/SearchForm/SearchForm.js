@@ -2,38 +2,46 @@ import icon from "../../../images/icon.svg";
 import React from "react";
 
 function SearchForm(props) {
-  const [line, setLine] = React.useState("");
   const [isChecked, setIsChecked] = React.useState(false);
   function handleShort() {
     setIsChecked(!isChecked);
   }
+  React.useEffect(()=>{
+    document.querySelector(".search-form__input").value=props.searchLine;
+    filterList();
+  },[])
   React.useEffect(() => {
-    props.setFilteredList(
-     props.movies
-        .filter((item) => {
-          return item.nameRU.toLowerCase().includes(line);
-        })
-        
-    );
-    if (line === "") props.setFilteredList([]);
-    if (isChecked && line !== "")
-      props.setFilteredList(
-        props.movies
-          .filter((item) => {
-            if (item.duration < 40)
-              return item.nameRU.toLowerCase().includes(line);
-          })
-          
-      );
-  }, [line, isChecked]);
+   filterList();
+  }, [props.searchLine, isChecked]);
 
+  function filterList()
+  {
+    props.setFilteredList(
+      props.movies
+         .filter((item) => {
+           
+           return item.nameRU.toLowerCase().includes(props.searchLine);
+         })
+     );
+     if (props.searchLine==="") props.setFilteredList("")
+     if (isChecked && props.searchLine !== "")
+       props.setFilteredList(
+         props.movies
+           .filter((item) => {
+             if (item.duration < 40)
+               return item.nameRU.toLowerCase().includes(props.searchLine);
+           })
+           
+       );
+  }
   function handleChange(e) {
     e.preventDefault();
-    setLine(e.target.value.toLowerCase());
   }
   function handleFind(e) {
     e.preventDefault();
-    setLine(document.querySelector(".search-form__input").value.toLowerCase());
+    props.setSearchLine(document.querySelector(".search-form__input").value);
+    props.setSearchLine(document.querySelector(".search-form__input").value.toLowerCase());
+    filterList();
   }
   return (
     <section className="search-form">

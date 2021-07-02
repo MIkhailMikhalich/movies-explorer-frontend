@@ -10,7 +10,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -26,7 +26,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+     
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -43,7 +43,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
       body: JSON.stringify({
         name: name,
         email: email,
@@ -64,7 +64,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -111,7 +111,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -127,7 +127,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+     
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -145,7 +145,7 @@ class MainApi {
         Authorization: `${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
 
       body: JSON.stringify({
         country: data.country|| "undef",
@@ -175,7 +175,7 @@ class MainApi {
         Authorization: `${JWT}`,
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -187,7 +187,8 @@ class MainApi {
 }
 let jwt = localStorage.getItem("jwt");
 const api = new MainApi({
-  url: "http://localhost:3001/",
+  //url: "https://api.medvedmovies-explorer.nomoredomains.club/",
+  url:"http://localhost:3001/",
   headers: {
     authorization: `${jwt}`,
     "Content-Type": "application/json",

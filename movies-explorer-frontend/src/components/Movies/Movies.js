@@ -5,16 +5,19 @@ import React from "react";
 
 function Movies(props) {
   const [filteredList, setFilteredList] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [showedList, setShowedList] = React.useState([]);
   const [numberOfMovies, setNunberOfMovies] = React.useState(0);
+  
+
   function handleOnMore() {
     if (window.innerWidth >= 1280) {
-      return setNunberOfMovies(numberOfMovies+3);
+      return setNunberOfMovies(numberOfMovies + 3);
     } else if (window.innerWidth <= 1250) {
-      return setNunberOfMovies(numberOfMovies+2);
+      return setNunberOfMovies(numberOfMovies + 2);
     }
   }
+  
   function handleWindow() {
     if (window.innerWidth >= 1280) {
       return setNunberOfMovies(3);
@@ -34,6 +37,7 @@ function Movies(props) {
   function HandleDeleteFromFilter(ID) {
     props.onDelete(ID);
   }
+ 
 
   React.useEffect(() => {
     setShowedList(filteredList.slice(0, numberOfMovies));
@@ -45,6 +49,7 @@ function Movies(props) {
   }, []);
 
   React.useEffect(() => {
+   
     if (
       filteredList.length >= numberOfMovies &&
       showedList.length !== filteredList.length
@@ -60,10 +65,13 @@ function Movies(props) {
         setIsLoading(false);
       }, 1000);
     setShowedList(filteredList.slice(0, numberOfMovies));
+   
   }, [filteredList]);
   return (
     <main>
       <SearchForm
+        searchLine={props.searchLine}
+        setSearchLine={props.setSearchLine}
         numberOfMovies={numberOfMovies}
         setshowedList={setShowedList}
         onChange={handleWindow}
