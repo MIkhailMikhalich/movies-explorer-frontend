@@ -1,5 +1,4 @@
 import avatar from "../../../images/Avatar.svg";
-import cross from "../../../images/close.svg"
 import React from "react";
 
 function Menu(props) {
@@ -7,22 +6,26 @@ function Menu(props) {
 
   function handleMain() {
     props.onMain();
+    props.onMenu();
+
   }
   function handleMovies() {
     props.onMovies();
+    props.onMenu();
   }
   function handleSavedMovies() {
     props.onSavedMovies();
+    props.onMenu();
   }
 
   function handleProfile() {
     props.onProfile();
+    props.onMenu();
   }
 
   return (
     <section className={`menu ${props.isMenuOpened && "menu__visible"} `}>
       <div className="menu__buttons-container">
-        <button onClick={props.onMenu} className="menu__close-button button"><img alt="Крестик" src={cross} className="menu__close-img"/></button>
         <div className="menu__buttons-place">
           <button onClick={handleMain} className="button menu__button">
             Главная

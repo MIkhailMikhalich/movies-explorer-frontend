@@ -2,8 +2,12 @@ import React from "react";
 import avatar from "../../../images/Avatar.svg";
 
 function NavigationForAuthorised(props) {
+
+  
+
   function handleMenu() {
     props.onMenu();
+   
   }
   function handleMovies() {
     props.onMovies();
@@ -19,17 +23,16 @@ function NavigationForAuthorised(props) {
 
   return (
     <div className="buttons-place">
-      <input type="checkbox"   id="checkbox" className={`buttons-place__checkbox`} />
-      <label for="checkbox">
-        <button className="buttons-place__menu button" onClick={handleMenu}>
-          <div class="buttons-place__hamburger">
-            <span id="bar1" className="buttons-place__hamburger_bar "></span>
-            <span id="bar2" className="buttons-place__hamburger_bar "></span>
-            <span id="bar3" className="buttons-place__hamburger_bar "></span>
-            <span id="bar4" className="buttons-place__hamburger_bar "></span>
-          </div>
-        </button>
-      </label>
+      
+      <input type="checkbox" id="checkbox" className="buttons-place__checkbox"/>
+        <label onClick={handleMenu} htmlFor="checkbox">
+            <div className="buttons-place__hamburger">
+                <span className="buttons-place__hamburger_bar bar1"></span>
+                <span className="buttons-place__hamburger_bar bar2"></span>
+                <span className="buttons-place__hamburger_bar bar3"></span>
+                <span className="buttons-place__hamburger_bar bar4"></span>
+            </div>
+        </label>
 
       <button onClick={handleMovies} className="button navigation__auth-button">
         Фильмы

@@ -1,0 +1,11 @@
+.modalwindow__overlay
+{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+.modalwindow__overlay:hover
+{
+    opacity: 1;
+    cursor: default;
+}

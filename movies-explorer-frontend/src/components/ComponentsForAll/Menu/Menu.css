@@ -1,6 +1,5 @@
 .menu
 {
-    display: none;
     margin: 0;
     width: 100%;
     height: 100%;
@@ -10,4 +9,8 @@
     top: 0;
     left: 0;
     z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 1s, opacity 1s ease-out 0.2s;
+    
 }

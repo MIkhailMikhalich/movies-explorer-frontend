@@ -1,9 +1,27 @@
 .buttons-place__checkbox
 {
-    display: none;
+    
     position: absolute; 
     overflow: hidden; 
     clip: rect(0 0 0 0); 
     height: 1px; width: 1px; 
     margin: -1px; padding: 0; border: 0; 
+ 
+}
+.buttons-place__checkbox:checked + label > .buttons-place__hamburger  > .bar1{
+    transform: translateX(40px);
+    background-color: transparent;
+}
+
+.buttons-place__checkbox:checked + label > .buttons-place__hamburger > .bar2{
+    transform: rotate(45deg);
+}
+
+.buttons-place__checkbox:checked + label > .buttons-place__hamburger > .bar3{
+    transform: rotate(-45deg);
+}
+
+.buttons-place__checkbox:checked + label > .buttons-place__hamburger > .bar4{
+    transform: translateX(-40px);
+    background-color: transparent;
 }

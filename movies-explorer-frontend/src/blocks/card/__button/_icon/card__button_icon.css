@@ -1,0 +1,8 @@
+.card__button_icon
+{
+    background-image: url(../../../../images/saveicon.svg);
+    z-index: 1;
+    position: relative;
+    height: 30px;
+    width: 30px;
+}

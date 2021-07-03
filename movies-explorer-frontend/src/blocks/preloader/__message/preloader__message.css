@@ -1,0 +1,14 @@
+.preloader__message
+{
+    margin: 50px auto;
+    text-align: center;
+    font-weight: 500;
+    font-size: 2em;
+}
+@media screen and (max-width: 620px)
+{
+    .preloader__message
+    {
+        font-size: 1.5em;
+    }
+}
