@@ -3,7 +3,7 @@
 **Ссылка на сайт:http://medvedmovies-explorer.nomoredomains.club (На данный момент не доступна, закончился хостинг)**
 ## Технологии:
 - JS
-- ReactJS
+- React
 - CSS
 - HTML
 ## Статус:
